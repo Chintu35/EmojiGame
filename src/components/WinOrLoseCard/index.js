@@ -1,5 +1,6 @@
 const WinOrLoseCard = props => {
   const {score, status, startGame} = props // Receive startGame as a prop
+  const scoreText = `${score}/12`
 
   const state = status ? 'You Won' : 'You Loss'
   const img = status
@@ -15,7 +16,7 @@ const WinOrLoseCard = props => {
       <img className="state" src={img} alt="win or lose" />
       <h1>{state}</h1>
       <p>Best Score</p>
-      <p>{score}/12</p>
+      <p>{scoreText}</p>
       <button type="button" onClick={onRestartGame}>
         Play Again
       </button>

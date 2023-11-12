@@ -26,38 +26,35 @@ class EmojiGame extends Component {
 
   addEmojiItem = id => {
     const {emojisList} = this.props
-    const {ClickedEmojitems, Score, TopScore} = this.state
+    const {ClickedEmojitems, Score} = this.state
     const newScore = Score + 1
-    const updatedtopScore = Math.max(newScore, TopScore)
-
-    if (updatedtopScore === emojisList.length) {
+    if (newScore === emojisList.length) {
       this.setState({
         gamestart: false,
         status: true,
-        Score: newScore,
-        TopScore: updatedtopScore,
         ClickedEmojitems: [],
       })
     } else if (!ClickedEmojitems.includes(id)) {
       this.setState({
         ClickedEmojitems: [...ClickedEmojitems, id],
         Score: newScore,
-        TopScore: updatedtopScore,
       })
     } else {
       this.setState({
         gamestart: false,
-        TopScore: updatedtopScore,
         ClickedEmojitems: [],
       })
     }
   }
 
   startGame = () => {
+    const {Score, TopScore} = this.state
+    const newScore = Score + 1
+    const updatedtopScore = Math.max(newScore, TopScore)
     this.setState({
       gamestart: true,
       Score: 0,
-      TopScore: 0,
+      TopScore: updatedtopScore - 1,
       ClickedEmojitems: [],
     })
   }
@@ -89,7 +86,7 @@ class EmojiGame extends Component {
             score={Score}
             topscore={TopScore}
             status={status}
-            startGame={this.startGame} // Pass the startGame function
+            startGame={this.startGame}
           />
         )}
       </div>
